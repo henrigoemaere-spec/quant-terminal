@@ -1,0 +1,56 @@
+# Configuratie voor het optieprijzer systeem
+
+# Marktparameters (default)
+markt:
+  spot: 100.0
+  rente: 0.05
+  dividend: 0.02
+  volatiliteit: 0.20
+
+# Boom-methode
+boom:
+  N_default: 500
+  N_high_precision: 2000
+
+# Monte Carlo
+monte_carlo:
+  N_default: 100000
+  seed: 42
+
+# Kalibratie
+kalibratie:
+  heston:
+    start: [0.04, 2.0, 0.04, 0.5, -0.7]
+    maxiter: 150
+  sabr:
+    beta: 0.5
+    start: [0.20, -0.3, 0.4]
+    maxiter: 200
+  bates:
+    start: [0.04, 2.0, 0.04, 0.5, -0.7, 0.1, -0.1, 0.15]
+    maxiter: 80
+  dupire:
+    smooth_sigma: 1.5
+    n_T: 10
+    n_K: 10
+
+# Marktdata
+marktdata:
+  ticker: SPY
+  max_expiries: 8
+  min_volume: 10
+  cboe_symbool: SPX
+  cboe_min_volume: 50
+
+# Filter-instellingen voor kalibratie
+filters:
+  min_T: 0.05       # SABR werkt niet voor T < 0.05
+  max_T: 2.0
+  min_IV: 0.05
+  max_IV: 0.80
+  strikes_range: 0.15   # 15% van forward
+
+# Output
+output:
+  plots_dir: plots
+  logs_dir: logs
